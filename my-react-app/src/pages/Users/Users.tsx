@@ -7,9 +7,13 @@ function Users() {
 
   return (
     <>
-      <ModalButton text="Abrir Modal" modal={Modal}></ModalButton>
+      <ModalButton
+        text="Abrir Modal"
+        modal={Modal}
+        mutate={resp.mutate}
+      ></ModalButton>
       {resp.data.map((x) => (
-        <div key={x.email}>
+        <div key={Math.random()}>
           {x.name} | {x.email} | {x.phone}
         </div>
       ))}

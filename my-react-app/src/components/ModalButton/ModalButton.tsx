@@ -1,13 +1,16 @@
 import { useState } from "react";
 import type { ModalProps } from "../Modal/Modal";
-import UserForm from "../UserForm/UserForm";
+import UserForm from "../Form/UserForm";
+import type { KeyedMutator } from "swr";
+import type { UserType } from "../../schemas/userSchema";
 
 type Props = {
   text: string;
   modal: React.ComponentType<ModalProps>;
+  mutate: KeyedMutator<UserType[]>;
 };
 
-function ModalButton({ text, modal: Modal }: Props) {
+function ModalButton({ text, modal: Modal, mutate }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +18,12 @@ function ModalButton({ text, modal: Modal }: Props) {
       <button onClick={() => setIsOpen(true)}>{text}</button>
       {isOpen && (
         <Modal closeFun={() => setIsOpen(false)}>
-          <UserForm></UserForm>
+          <UserForm
+            submitFunc={(newUser) => {
+              console.log(newUser);
+              mutate((userList) => [...(userList ?? []), newUser], false);
+            }}
+          ></UserForm>
         </Modal>
       )}
     </>

@@ -1,19 +1,23 @@
 import useSWR from "swr";
-import { fetcher } from "../../services/api";
-import { usersSchema, type UserListData } from "../../schemas/userSchema";
+import { fetcher } from "../../services/fetcher";
+import {
+  userListSchema,
+  type UserListType,
+  type UserType,
+} from "../../schemas/userSchema";
 import z from "zod";
 
 function useUser() {
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR<UserType[]>(
     "https://jsonplaceholder.typicode.com/users",
     fetcher,
   );
 
-  let parsedData: UserListData = [];
+  let parsedData: UserListType = [];
 
   if (data) {
     try {
-      parsedData = usersSchema.parse(data);
+      parsedData = userListSchema.parse(data);
     } catch (error) {
       if (error instanceof z.ZodError) {
         console.error("Data list does not match schema");
@@ -21,7 +25,7 @@ function useUser() {
     }
   }
 
-  return { data: parsedData, error, isLoading };
+  return { data: parsedData, error, isLoading, mutate };
 }
 
 export default useUser;

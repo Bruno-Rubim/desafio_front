@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import {
-  type UserData as UserType,
+  type UserType as UserType,
   userSchema,
 } from "../../schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-function UserForm() {
+type UserFormProps = {
+  submitFunc: (newUser: UserType) => void;
+};
+
+function UserForm({ submitFunc }: UserFormProps) {
   const {
     register,
     handleSubmit,
@@ -14,8 +18,8 @@ function UserForm() {
     resolver: zodResolver(userSchema),
   });
 
-  const onSubmit = (data: UserType) => {
-    console.log(data);
+  const onSubmit = async (newUser: UserType) => {
+    submitFunc(newUser);
   };
 
   return (
