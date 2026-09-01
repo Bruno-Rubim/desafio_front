@@ -1,12 +1,12 @@
 import z from "zod";
 
 export const userSchema = z.object({
-  name: z.string().min(1, "[placeholder]"),
-  email: z.email(""),
+  name: z.string().min(3, "Nome deve conter pelo menos 3 letras."),
+  email: z.email("Email inválido."),
   phone: z.string(),
 });
 
-export type UserType = z.infer<typeof userSchema>;
+export type UserData = z.infer<typeof userSchema>;
 
 export const usersSchema = z.array(userSchema);
-export type UsersType = z.infer<typeof usersSchema>;
+export type UserListData = z.infer<typeof usersSchema>;

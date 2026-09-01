@@ -2,14 +2,15 @@ import styles from "./Modal.module.css";
 
 export type ModalProps = {
   closeFun: () => void;
+  children: React.ReactNode;
 };
 
-function Modal({ closeFun }: ModalProps) {
+function Modal({ closeFun, children }: ModalProps) {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <button onClick={() => closeFun()}>X</button>
-        Modal Funcionando dahora aqui
+        <div>{children}</div>
       </div>
     </div>
   );

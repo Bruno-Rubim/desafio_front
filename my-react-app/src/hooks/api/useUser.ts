@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "../../services/api";
-import { usersSchema, type UsersType } from "../../schemas/userSchema";
+import { usersSchema, type UserListData } from "../../schemas/userSchema";
 import z from "zod";
 
 function useUser() {
@@ -9,7 +9,7 @@ function useUser() {
     fetcher,
   );
 
-  let parsedData: UsersType = [];
+  let parsedData: UserListData = [];
 
   if (data) {
     try {

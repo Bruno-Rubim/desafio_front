@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ModalProps } from "../Modal/Modal";
+import UserForm from "../UserForm/UserForm";
 
 type Props = {
   text: string;
@@ -12,7 +13,11 @@ function ModalButton({ text, modal: Modal }: Props) {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>{text}</button>
-      {isOpen && <Modal closeFun={() => setIsOpen(false)}></Modal>}
+      {isOpen && (
+        <Modal closeFun={() => setIsOpen(false)}>
+          <UserForm></UserForm>
+        </Modal>
+      )}
     </>
   );
 }
