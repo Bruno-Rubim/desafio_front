@@ -6,6 +6,7 @@ import {
 } from "../../schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { KeyedMutator } from "swr";
+import createUser from "../../hooks/api/createUser";
 
 type UserFormProps = {
   mutate: KeyedMutator<UserListType>;
@@ -20,7 +21,8 @@ function UserForm({ mutate }: UserFormProps) {
     resolver: zodResolver(userSchema),
   });
 
-  const onSubmit = async (newUser: UserType) => {
+  const onSubmit = async (userData: UserType) => {
+    const newUser = await createUser(userData);
     mutate((userList) => [...(userList ?? []), newUser], false);
   };
 
