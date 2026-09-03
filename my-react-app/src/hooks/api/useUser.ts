@@ -7,6 +7,15 @@ import {
 } from "../../schemas/userSchema";
 import z from "zod";
 
+let url = localStorage.getItem("requestUrl");
+if (url == null) {
+  url = "https://jsonplaceholder.typicode.com/users";
+  localStorage.setItem(
+    "requestUrl",
+    "https://jsonplaceholder.typicode.com/users",
+  );
+}
+
 function useUser() {
   const { data, error, isLoading, mutate } = useSWR<UserType[]>(
     "https://jsonplaceholder.typicode.com/users",
