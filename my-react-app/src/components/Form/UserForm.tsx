@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
 import {
+  type UserListType,
   type UserType as UserType,
   userSchema,
 } from "../../schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { KeyedMutator } from "swr";
 
 type UserFormProps = {
-  submitFunc: (newUser: UserType) => void;
+  mutate: KeyedMutator<UserListType>;
 };
 
-function UserForm({ submitFunc }: UserFormProps) {
+function UserForm({ mutate }: UserFormProps) {
   const {
     register,
     handleSubmit,
@@ -19,7 +21,7 @@ function UserForm({ submitFunc }: UserFormProps) {
   });
 
   const onSubmit = async (newUser: UserType) => {
-    submitFunc(newUser);
+    mutate((userList) => [...(userList ?? []), newUser], false);
   };
 
   return (

@@ -1,3 +1,4 @@
+import UserForm from "../../components/Form/UserForm";
 import Modal from "../../components/Modal/Modal";
 import ModalButton from "../../components/ModalButton/ModalButton";
 import useUser from "../../hooks/api/useUser";
@@ -7,11 +8,9 @@ function Users() {
 
   return (
     <>
-      <ModalButton
-        text="Abrir Modal"
-        modal={Modal}
-        mutate={resp.mutate}
-      ></ModalButton>
+      <ModalButton text="Abrir Modal" modal={Modal}>
+        <UserForm mutate={resp.mutate}></UserForm>
+      </ModalButton>
       {resp.data.map((x) => (
         <div key={Math.random()}>
           {x.name} | {x.email} | {x.phone}
