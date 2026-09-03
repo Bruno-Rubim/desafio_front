@@ -6,11 +6,12 @@ import {
   type UserType,
 } from "../../schemas/userSchema";
 import z from "zod";
+import { STORAGE_KEYS } from "../../constants/localStorage";
 
-let url = localStorage.getItem("requestUrl");
+let url = localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL);
 if (url == null) {
   url = "https://jsonplaceholder.typicode.com/users";
-  localStorage.setItem("requestUrl", url);
+  localStorage.setItem(STORAGE_KEYS.USER_REQUEST_URL, url);
 }
 
 function useUser() {

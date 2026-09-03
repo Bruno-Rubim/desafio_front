@@ -1,7 +1,9 @@
+import { STORAGE_KEYS } from "../../constants/localStorage";
 import type { UserType } from "../../schemas/userSchema";
 
 async function createUser(user: UserType) {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+  const url = localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL) ?? "";
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -10,6 +12,7 @@ async function createUser(user: UserType) {
   });
 
   if (!response.ok) {
+    console.log("no ok");
     throw new Error("Cadastro de usuário falhou!");
   }
 

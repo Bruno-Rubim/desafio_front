@@ -29,7 +29,10 @@ function Users() {
           <UserForm mutate={resp.mutate}></UserForm>
         </Modal>
       )}
-      <UserList list={resp.data} error={resp.error}></UserList>
+      {resp.isLoading && <p>Carregando...</p>}
+      {!resp.isLoading && (
+        <UserList list={resp.data} error={resp.error}></UserList>
+      )}
       <ModalButton
         text="Configurar Request"
         openFunc={() => {
