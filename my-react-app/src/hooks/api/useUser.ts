@@ -10,17 +10,11 @@ import z from "zod";
 let url = localStorage.getItem("requestUrl");
 if (url == null) {
   url = "https://jsonplaceholder.typicode.com/users";
-  localStorage.setItem(
-    "requestUrl",
-    "https://jsonplaceholder.typicode.com/users",
-  );
+  localStorage.setItem("requestUrl", url);
 }
 
 function useUser() {
-  const { data, error, isLoading, mutate } = useSWR<UserType[]>(
-    "https://jsonplaceholder.typicode.com/users",
-    fetcher,
-  );
+  const { data, error, isLoading, mutate } = useSWR<UserType[]>(url, fetcher);
 
   let parsedData: UserListType = [];
 
