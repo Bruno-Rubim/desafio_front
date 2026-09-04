@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { STORAGE_KEYS } from "../../constants/localStorage";
+import styles from "./RequestSettings.module.css";
 
 function RequestSettings() {
   const [requestUrl, setRequestUrl] = useState(
@@ -14,21 +15,31 @@ function RequestSettings() {
 
   return (
     <>
-      <h2>Alterar Resposta do request:</h2>
-      <select value={requestUrl} onChange={handleChange}>
-        <option value={"https://jsonplaceholder.typicode.com/users"}>
-          200 ✅
-        </option>
-        <option value={"https://tools-httpstatus.pickup-services.com/404"}>
-          404 ❌
-        </option>
-        <option value={"https://tools-httpstatus.pickup-services.com/500"}>
-          500 ❌
-        </option>
-      </select>
-      <button onClick={() => window.location.reload()}>
-        Recarregar Página
-      </button>
+      <p>
+        Isso irá alterar a URL usada nos requests de busca da lista de usuários
+        e cadastro de novo usuário
+      </p>
+      <p>URL atual: {requestUrl}</p>
+      <div className={styles.buttons}>
+        <select
+          className={styles.select}
+          value={requestUrl}
+          onChange={handleChange}
+        >
+          <option value={"https://jsonplaceholder.typicode.com/users"}>
+            200/201 ✅
+          </option>
+          <option value={"https://tools-httpstatus.pickup-services.com/404"}>
+            404 ❌
+          </option>
+          <option value={"https://tools-httpstatus.pickup-services.com/500"}>
+            500 ❌
+          </option>
+        </select>
+        <button onClick={() => window.location.reload()}>
+          Recarregar Página
+        </button>
+      </div>
     </>
   );
 }

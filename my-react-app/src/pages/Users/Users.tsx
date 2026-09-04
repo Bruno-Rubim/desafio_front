@@ -5,6 +5,7 @@ import ModalButton from "../../components/ModalButton/ModalButton";
 import useUser from "../../hooks/api/useUser";
 import UserList from "../../components/UserList/UserList";
 import RequestSettings from "../../components/RequestSettings/RequestSettings";
+import styles from "./Users.module.css";
 
 function Users() {
   const resp = useUser();
@@ -17,31 +18,35 @@ function Users() {
 
   return (
     <>
-      <ModalButton
-        text="Cadastrar Usuário"
-        openFunc={() => {
-          closeModals();
-          setUserModalState(true);
-        }}
-      ></ModalButton>
+      <div className={styles.main}>
+        <div className={styles.header}>Lista de usuários cadastrados</div>
+        <div>{<UserList resp={resp}></UserList>}</div>
+
+        <div className={styles.footer}>
+          <ModalButton
+            text="Cadastrar Usuário"
+            openFunc={() => {
+              closeModals();
+              setUserModalState(true);
+            }}
+          ></ModalButton>
+
+          <ModalButton
+            text="Configurar Request"
+            openFunc={() => {
+              closeModals();
+              setConfigModalState(true);
+            }}
+          ></ModalButton>
+        </div>
+      </div>
       {userModalState && (
-        <Modal closeFun={closeModals}>
+        <Modal closeFun={closeModals} name="Cadastro de Usuário">
           <UserForm mutate={resp.mutate}></UserForm>
         </Modal>
       )}
-      {resp.isLoading && <p>Carregando...</p>}
-      {!resp.isLoading && (
-        <UserList list={resp.data} error={resp.error}></UserList>
-      )}
-      <ModalButton
-        text="Configurar Request"
-        openFunc={() => {
-          closeModals();
-          setConfigModalState(true);
-        }}
-      ></ModalButton>
       {configModalState && (
-        <Modal closeFun={closeModals}>
+        <Modal closeFun={closeModals} name="Alterar Resposta do Request">
           <RequestSettings />
         </Modal>
       )}

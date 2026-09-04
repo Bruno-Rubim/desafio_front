@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  background-color: #585858;
+  border-radius: 15px;
+  min-width: 400px;
+}
+
+.main > div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header {
+  font-size: x-large;
+  font-weight: bold;
+  padding-top: 10px;
+  text-align: center;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+}

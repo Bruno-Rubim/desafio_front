@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.field {
+  input {
+    width: stretch;
+    border-radius: 5px;
+    border: gray solid 2px;
+    min-height: 25px;
+  }
+  margin-bottom: 15px;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.messageError {
+  color: red;
+}
+
+.messageSuccess {
+  color: green;
+}

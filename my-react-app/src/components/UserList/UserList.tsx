@@ -1,29 +1,42 @@
 import type { UserType } from "../../schemas/userSchema";
+import styles from "./UserList.module.css";
 
 type UserListProps = {
-  list: UserType[];
-  error: string | null;
+  resp: {
+    data: UserType[];
+    error: string | null;
+    isLoading: boolean;
+  };
 };
 
-function UserList({ list, error }: UserListProps) {
+function UserList({ resp }: UserListProps) {
   return (
     <>
-      {list.length > 0 && (
-        <table>
-          <tbody>
-            {list.map((u) => (
-              <tr key={Math.random()}>
-                <td>{u.name}</td>
-                <td>{u.email}</td>
-                <td>{u.phone}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {resp.data.length > 0 && (
+        <div className={styles.table}>
+          <div className={styles.rowHeader}>
+            <div className={styles.block}>Nome</div>
+            <div className={styles.block}>Email</div>
+            <div className={styles.block}>Telefone</div>
+          </div>
+          {resp.data.map((u) => (
+            <div className={styles.row} key={Math.random()}>
+              <div className={styles.block}>{u.name}</div>
+              <div className={styles.block}>{u.email}</div>
+              <div className={styles.blockRight}>{u.phone}</div>
+            </div>
+          ))}
+        </div>
       )}
 
-      {list.length == 0 && error == null && <p>List size 0</p>}
-      {list.length == 0 && error != null && <p>Error</p>}
+      {resp.isLoading && <div className={styles.message}>Carregando...</div>}
+
+      {!resp.isLoading && resp.data.length == 0 && resp.error != null && (
+        <div className={styles.errorMessage}>
+          Houve um erro ao buscar a lista de usuários, por favor tente
+          novamente.
+        </div>
+      )}
     </>
   );
 }
