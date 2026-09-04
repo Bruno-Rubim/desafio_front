@@ -1,10 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "../../services/fetcher";
-import {
-  userListSchema,
-  type UserListType,
-  type UserType,
-} from "../../schemas/userSchema";
+import { userListSchema, type UserType } from "../../schemas/userSchema";
 import z from "zod";
 import { STORAGE_KEYS } from "../../constants/localStorage";
 
@@ -14,17 +10,21 @@ if (url == null) {
   localStorage.setItem(STORAGE_KEYS.USER_REQUEST_URL, url);
 }
 
+/**
+ * Busca a lista de usuários com SWR da URL configurada no local storage verificando os dados com o schema
+ * @returns
+ */
 function useUser() {
   const { data, error, isLoading, mutate } = useSWR<UserType[]>(url, fetcher);
 
-  let parsedData: UserListType = [];
+  let parsedData: UserType[] = [];
 
   if (data) {
     try {
       parsedData = userListSchema.parse(data);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.error("Data list does not match schema");
+        console.error("Lista de dados não condizem com o schema");
       }
     }
   }

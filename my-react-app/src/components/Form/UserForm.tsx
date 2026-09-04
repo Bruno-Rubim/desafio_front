@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import {
-  type UserListType,
   type UserType as UserType,
   userSchema,
 } from "../../schemas/userSchema";
@@ -11,7 +10,7 @@ import { useState } from "react";
 import styles from "./UserForm.module.css";
 
 type UserFormProps = {
-  mutate: KeyedMutator<UserListType>;
+  mutate: KeyedMutator<UserType[]>;
 };
 
 function UserForm({ mutate }: UserFormProps) {

@@ -6,7 +6,6 @@ export const userSchema = z.object({
   phone: z.string().optional(),
 });
 
-export type UserType = z.infer<typeof userSchema>;
-
 export const userListSchema = z.array(userSchema);
-export type UserListType = z.infer<typeof userListSchema>;
+
+export type UserType = z.infer<typeof userSchema>;
