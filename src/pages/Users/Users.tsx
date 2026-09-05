@@ -32,7 +32,7 @@ function Users() {
           ></ModalButton>
 
           <ModalButton
-            text="Configurar Request"
+            text="Configurar Requisições"
             openFunc={() => {
               closeModals();
               setConfigModalState(true);
@@ -46,7 +46,7 @@ function Users() {
         </Modal>
       )}
       {configModalState && (
-        <Modal closeFun={closeModals} name="Alterar Resposta do Request">
+        <Modal closeFun={closeModals} name="Alterar Resposta das Requisições">
           <RequestSettings />
         </Modal>
       )}

@@ -15,10 +15,13 @@ function RequestSettings() {
 
   return (
     <>
-      <p>
-        Isso irá alterar a URL usada nos requests de busca da lista de usuários
-        e cadastro de novo usuário
-      </p>
+      <div>
+        Esta opção serve para testar a reação da interface à erros das
+        requisições, tanto para a busca de usuários quanto o cadastro de um
+        novo. <br />
+        Isso irá alterar a URL usada nas requisições de busca da lista de
+        usuários e cadastro de novo usuário.
+      </div>
       <p>URL atual: {requestUrl}</p>
       <div className={styles.buttons}>
         <select
