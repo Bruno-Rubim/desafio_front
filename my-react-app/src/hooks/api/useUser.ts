@@ -4,18 +4,16 @@ import { userListSchema, type UserType } from "../../schemas/userSchema";
 import z from "zod";
 import { STORAGE_KEYS } from "../../constants/localStorage";
 
-let url = localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL);
-if (url == null) {
-  url = "https://jsonplaceholder.typicode.com/users";
-  localStorage.setItem(STORAGE_KEYS.USER_REQUEST_URL, url);
-}
-
 /**
  * Busca a lista de usuários com SWR da URL configurada no local storage verificando os dados com o schema
  * @returns
  */
 function useUser() {
-  const { data, error, isLoading, mutate } = useSWR<UserType[]>(url, fetcher);
+  const { data, error, isLoading, mutate } = useSWR<UserType[]>(
+    localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL) ??
+      "https://jsonplaceholder.typicode.com/users",
+    fetcher,
+  );
 
   let parsedData: UserType[] = [];
 

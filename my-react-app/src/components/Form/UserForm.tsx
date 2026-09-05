@@ -42,8 +42,16 @@ function UserForm({ mutate }: UserFormProps) {
     }
   };
 
+  const onInvalidSubmit = () => {
+    setSubmitMessage("");
+    setError(false);
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit, onInvalidSubmit)}
+    >
       <div className={styles.field}>
         <div>Nome (obrigatório): </div>
         <input {...register("name")} />

@@ -37,6 +37,10 @@ function UserList({ resp }: UserListProps) {
           novamente.
         </div>
       )}
+
+      {!resp.isLoading && resp.data.length == 0 && resp.error == null && (
+        <div className={styles.message}>Não há usuários cadastrados.</div>
+      )}
     </>
   );
 }
