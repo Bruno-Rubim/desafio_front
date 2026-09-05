@@ -34,6 +34,9 @@ function UserForm({ mutate }: UserFormProps) {
       const newUser = await createUser(userData);
       mutate((userList) => [...(userList ?? []), newUser], false);
       setSubmitMessage("Cadastro realizado com sucesso!");
+      setTimeout(() => {
+        setSubmitMessage("");
+      }, 2500);
     } catch (error) {
       setSubmitMessage("Houve um erro ao cadastrar, tente novamente.");
       setError(true);
@@ -77,7 +80,7 @@ function UserForm({ mutate }: UserFormProps) {
         <div className={error ? styles.messageError : styles.messageSuccess}>
           {submitMessage || "\u00A0"}
         </div>
-        <button type="submit">
+        <button type="submit" disabled={loadingSubmit}>
           {loadingSubmit && "Enviando..."}
           {!loadingSubmit && "Enviar"}
         </button>
