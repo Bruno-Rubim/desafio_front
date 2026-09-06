@@ -7,7 +7,9 @@ import type { UserType } from "../../schemas/userSchema";
  * @returns
  */
 async function createUser(user: UserType) {
-  const url = localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL) ?? "";
+  const url =
+    localStorage.getItem(STORAGE_KEYS.USER_REQUEST_URL) ??
+    "https://jsonplaceholder.typicode.com/users";
   const response = await fetch(url, {
     method: "POST",
     headers: {
