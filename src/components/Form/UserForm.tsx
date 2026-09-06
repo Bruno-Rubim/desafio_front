@@ -11,9 +11,10 @@ import styles from "./UserForm.module.css";
 
 type UserFormProps = {
   mutate: KeyedMutator<UserType[]>;
+  succesFun: () => void;
 };
 
-function UserForm({ mutate }: UserFormProps) {
+function UserForm({ mutate, succesFun }: UserFormProps) {
   const {
     register,
     handleSubmit,
@@ -24,22 +25,16 @@ function UserForm({ mutate }: UserFormProps) {
 
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
-  const [error, setError] = useState(false);
 
   const onSubmit = async (userData: UserType) => {
     try {
       setSubmitMessage("");
       setLoadingSubmit(true);
-      setError(false);
       const newUser = await createUser(userData);
       mutate((userList) => [...(userList ?? []), newUser], false);
-      setSubmitMessage("Cadastro realizado com sucesso!");
-      setTimeout(() => {
-        setSubmitMessage("");
-      }, 2500);
+      succesFun();
     } catch (error) {
       setSubmitMessage("Houve um erro ao cadastrar, tente novamente.");
-      setError(true);
     } finally {
       setLoadingSubmit(false);
     }
@@ -47,7 +42,6 @@ function UserForm({ mutate }: UserFormProps) {
 
   const onInvalidSubmit = () => {
     setSubmitMessage("");
-    setError(false);
   };
 
   return (
@@ -77,9 +71,7 @@ function UserForm({ mutate }: UserFormProps) {
       </div>
 
       <div className={styles.buttons}>
-        <div className={error ? styles.messageError : styles.messageSuccess}>
-          {submitMessage || "\u00A0"}
-        </div>
+        <div className={styles.messageError}>{submitMessage || "\u00A0"}</div>
         <button type="submit" disabled={loadingSubmit}>
           {loadingSubmit && "Enviando..."}
           {!loadingSubmit && "Enviar"}

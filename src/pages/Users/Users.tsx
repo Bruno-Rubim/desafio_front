@@ -42,7 +42,7 @@ function Users() {
       </div>
       {userModalState && (
         <Modal closeFun={closeModals} name="Cadastro de Usuário">
-          <UserForm mutate={resp.mutate}></UserForm>
+          <UserForm mutate={resp.mutate} succesFun={closeModals}></UserForm>
         </Modal>
       )}
       {configModalState && (
