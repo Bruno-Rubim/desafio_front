@@ -16,9 +16,9 @@ function RequestSettings() {
   return (
     <>
       <div>
-        Esta opção serve para testar a reação da interface à erros das
-        requisições, tanto para a busca de usuários quanto o cadastro de um
-        novo. <br />
+        Esta opção serve para testar a reação da interface a erros das
+        requisições, tanto na busca de usuários quanto o cadastro de um novo
+        usuário. <br />
         Isso irá alterar a URL usada nas requisições de busca da lista de
         usuários e cadastro de novo usuário.
       </div>
