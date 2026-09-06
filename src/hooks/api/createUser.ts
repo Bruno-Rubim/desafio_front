@@ -2,7 +2,7 @@ import { STORAGE_KEYS } from "../../constants/localStorage";
 import type { UserType } from "../../schemas/userSchema";
 
 /**
- * Faz um request POST inserindo os dados do usuário usando a URL configurada no local storage
+ * Faz uma requisição POST inserindo os dados do usuário usando a URL configurada no local storage
  * @param user Dados do usuário a ser inserido
  * @returns
  */

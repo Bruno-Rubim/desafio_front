@@ -1,5 +1,5 @@
 /**
- * Fetcher de dados a partir do URL dado e retorna formatado em JSON
+ * Fetcher de dados a partir do URL fornecido e retorna formatado em JSON
  * @param url URL para fazer o fetch
  * @returns
  */
