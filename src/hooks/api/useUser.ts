@@ -14,17 +14,19 @@ function useUser() {
       "https://jsonplaceholder.typicode.com/users",
     fetcher,
   );
-
   let parsedData: UserType[] = [];
 
   if (data) {
     try {
       parsedData = userListSchema.parse(data);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        console.error("Lista de dados não condizem com o schema");
+    } catch (e) {
+      if (e instanceof z.ZodError) {
+        console.error("Lista de dados não condizem com o schema.", e);
       }
     }
+  }
+  if (error) {
+    console.error("Erro na listagem de usuários.", error);
   }
 
   return { data: parsedData, error, isLoading, mutate };
